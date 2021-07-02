@@ -35,20 +35,26 @@ function convertObj(periodicTask, today) {
   return { ...data };
 }
 
-var today = new Date(2016, 05, 25);
-console.log("Present date : ", new Date());
-console.log("Present time : ", new Date().toLocaleTimeString("en-US"));
-var s = new Date().toLocaleString(undefined, {
+var today = new Date(2016, 05, 25).toLocaleString(undefined, {
   timeZone: "Asia/Kolkata",
 });
-console.log("Indian time : ", s);
+// console.log("Present date : ", new Date());
+// console.log("Present time : ", new Date().toLocaleTimeString("en-US"));
+// var s = new Date().toLocaleString(undefined, {
+//   timeZone: "Asia/Kolkata",
+// });
+// console.log("Indian time : ", s);
 
 setInterval(async () => {
   console.log("Inside setInterval Function");
   var todaysDate, todaysName, todaysDay, todaysMonth, todaysTasks;
   todaysDay = dateFormat(today, "dd");
-  if (todaysDay !== dateFormat(new Date(), "dd")) {
-    today = new Date();
+  var newDate = new Date().toLocaleString(undefined, {
+    timeZone: "Asia/Kolkata",
+  });
+  if (todaysDay !== dateFormat(newDate, "dd")) {
+    console.log("Date changed, So adding periodic tasks to new date ", dateFormat(newDate, "mm/dd/yyyy"));
+    today = newDate;
     todaysDate = dateFormat(today, "mm/dd/yyyy");
     todaysName = dateFormat(today, "dddd");
     todaysDay = dateFormat(today, "dd");
