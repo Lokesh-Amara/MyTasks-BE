@@ -38,8 +38,13 @@ function convertObj(periodicTask, today) {
 var today = new Date(2016, 05, 25);
 console.log("Present date : ", new Date());
 console.log("Present time : ", new Date().toLocaleTimeString("en-US"));
+var s = new Date().toLocaleString(undefined, {
+  timeZone: "Asia/Kolkata",
+});
+console.log("Indian time : ", s);
 
 setInterval(async () => {
+  console.log("Inside setInterval Function");
   var todaysDate, todaysName, todaysDay, todaysMonth, todaysTasks;
   todaysDay = dateFormat(today, "dd");
   if (todaysDay !== dateFormat(new Date(), "dd")) {
