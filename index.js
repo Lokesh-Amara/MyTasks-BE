@@ -110,7 +110,10 @@ setInterval(async () => {
 
 function getTense(givenDate) {
   var givenDateParts = givenDate.split("/");
-  var todaysDate = dateFormat(new Date(), "mm/dd/yyyy");
+  let Tdate = new Date().toLocaleString(undefined, {
+    timeZone: "Asia/Kolkata",
+  });
+  var todaysDate = dateFormat(Tdate, "mm/dd/yyyy");
   var todaysDateParts = todaysDate.split("/");
 
   if (givenDateParts[2] > todaysDateParts[2]) {
