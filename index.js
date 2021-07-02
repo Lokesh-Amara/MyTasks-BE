@@ -36,6 +36,8 @@ function convertObj(periodicTask, today) {
 }
 
 var today = new Date(2016, 05, 25);
+console.log("Present date : ", new Date());
+console.log("Present time : ", new Date().toLocaleTimeString("en-US"));
 
 setInterval(async () => {
   var todaysDate, todaysName, todaysDay, todaysMonth, todaysTasks;
@@ -55,7 +57,14 @@ setInterval(async () => {
       const periodicTasks = await db
         .collection("tasks")
         .find({
-          "tasktype.type": { $in: ["EVERYDAY", "WEEKLY", "MONTHLY", "YEARLY"] },
+          $and: [
+            {
+              "tasktype.type": {
+                $in: ["EVERYDAY", "WEEKLY", "MONTHLY", "YEARLY"],
+              },
+            },
+            { executiondate: "none" },
+          ],
         })
         .project({ _id: 0 })
         .toArray();
@@ -86,7 +95,7 @@ setInterval(async () => {
       console.log(err);
     }
   }
-}, 60 * 60 * 1000);
+}, 10 * 60 * 1000);
 
 function getTense(givenDate) {
   var givenDateParts = givenDate.split("/");
